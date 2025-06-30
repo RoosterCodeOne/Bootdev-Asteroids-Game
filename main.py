@@ -8,14 +8,11 @@ from asteroidfield import *
 from shot import *
 
 def resolve_asteroid_collision(a1, a2):
-    # Vector between centers
     delta = a1.position - a2.position
     distance = delta.length()
-
     if distance == 0:
-        return  # avoid division by zero
-
-    # Normal vector
+        return
+    
     normal = delta.normalize()
 
     # Relative velocity
@@ -23,7 +20,7 @@ def resolve_asteroid_collision(a1, a2):
     speed = relative_velocity.dot(normal)
 
     if speed > 0:
-        return  # they're moving apart
+        return
 
     # Simple elastic collision (equal mass)
     impulse = normal * speed
@@ -88,10 +85,6 @@ def main():
             obj.draw(screen)
         pygame.display.flip()
         dt = clock.tick(60) / 1000
-
-
-
-
 
 if __name__ == "__main__":
     main()
